@@ -1,1 +1,3 @@
-# engg1340-mylitnesspal
+# MyLitnessPal
+
+A project for our ENGG1320 class.
