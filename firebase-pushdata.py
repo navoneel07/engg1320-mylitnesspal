@@ -1,7 +1,9 @@
 import pyrebase as pb
 import serial
+import re
 
-#set up configuration for the firebase app
+# for the firebase database
+
 config = {
   "apiKey": "AIzaSyAQ7U9x2dSvAJJ4fh7p9rO7KBO1qPp55KE",
   "authDomain": "mylitnesspal.firebaseapp.com",
@@ -10,19 +12,28 @@ config = {
   "serviceAccount": "mylitnesspal-firebase-adminsdk-yrvkq-637f8b32bc.json"
 }
 
-#initialize firebase
 firebase = pb.initialize_app(config)
-
-#read data from serial port and write to text file
-
-
-#read values from file and write to firebase database
-#data = open("data.txt", "r")
-#values = []
-#for value in data:
-#    value.replace('\n', '')
-#    values.append(value)
 db = firebase.database()
-#db.child("Food weights").set(values)
-lmao = db.child("Food weights").get().val()
-print(lmao)
+
+def getWeight():
+    arduino = serial.Serial("/dev/cu.usbmodem14101", 9600)
+    rawdata = []
+    count = 0
+    while count<10:
+        print(count)
+        rawdata.append(str(arduino.readline()))
+        count+=1
+    newraw = []
+    for line in rawdata:
+        newraw.append(re.findall('\d+\.\d+', line))
+    sum = 0
+    for i in range(5,10):
+        sum+=float(newraw[i][0])
+    return round(sum/5, 2)
+
+def addIngredient():
+    newIng = {"Photo" : '', "Name" : '', "Weight" : getWeight()}
+    db.child("Ingredient").set(newIng)
+    print("Node added.")
+
+addIngredient()
