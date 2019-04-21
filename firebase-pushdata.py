@@ -1,9 +1,14 @@
 import pyrebase as pb
 import serial
 import re
+from clarifai.rest import ClarifaiApp
+from cImage import *
+
+#setup clarifai api with its food model
+app = ClarifaiApp(api_key='528dcf0eeb5d4168b4a0a43831fc080c')
+model = app.models.get('food-items-v1.0')
 
 # for the firebase database
-
 config = {
   "apiKey": "AIzaSyAQ7U9x2dSvAJJ4fh7p9rO7KBO1qPp55KE",
   "authDomain": "mylitnesspal.firebaseapp.com",
@@ -32,8 +37,19 @@ def getWeight():
     return round(sum/5, 2)
 
 def addIngredient():
-    newIng = {"Photo" : '', "Name" : '', "Weight" : getWeight()}
+    newIng = {"Name" : '', "Weight" : getWeight()}
     db.child("Ingredient").set(newIng)
     print("Node added.")
 
-addIngredient()
+def processImage(message):
+    if message["data"] != None:
+        #an image has been uploaded, process it using Clarifai Api
+        response = model.predict_by_url(message["data"])
+        
+        foodName = response["outputs"][0]["data"]["concepts"][0]["name"]
+        print (foodName)
+    else:
+        print("no image uploaded")
+
+imageStream = db.child("Ingredient").child("Photo").stream(processImage);
+    
