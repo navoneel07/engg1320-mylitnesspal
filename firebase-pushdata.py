@@ -3,6 +3,10 @@ import serial
 import re
 from clarifai.rest import ClarifaiApp
 from cImage import *
+import math
+
+#dictionary containing caloric information on some foods (per 100g)
+foods = {"banana":89, "apple":52, "broccoli":34}
 
 #setup clarifai api with its food model
 app = ClarifaiApp(api_key='528dcf0eeb5d4168b4a0a43831fc080c')
@@ -21,7 +25,7 @@ firebase = pb.initialize_app(config)
 db = firebase.database()
 
 def getWeight():
-    arduino = serial.Serial("/dev/cu.usbmodem14101", 9600)
+    arduino = serial.Serial('com3', 9600)
     rawdata = []
     count = 0
     while count<10:
@@ -36,10 +40,12 @@ def getWeight():
         sum+=float(newraw[i][0])
     return round(sum/5, 2)
 
-def addIngredient():
-    newIng = {"Name" : '', "Weight" : getWeight()}
-    db.child("Ingredient").set(newIng)
-    print("Node added.")
+def getCalories(food, weight):
+    kcal = 90;
+    for key, value in foods.items():
+        if key == food:
+            kcal = math.floor((weight * value) / 100)
+    return kcal;
 
 def processImage(message):
     if message["data"] != None:
@@ -47,7 +53,10 @@ def processImage(message):
         response = model.predict_by_url(message["data"])
         
         foodName = response["outputs"][0]["data"]["concepts"][0]["name"]
+        db.child("Ingredient").child("name").set(foodName)
+        db.child("Ingredient").child("kCal").set(str(getCalories(foodName, getWeight())))
         print (foodName)
+        
     else:
         print("no image uploaded")
 

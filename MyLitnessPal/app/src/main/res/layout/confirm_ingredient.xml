@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp">
+
+        <ProgressBar
+            android:id="@+id/pop_prog_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_alignParentLeft="true" />
+
+        <ProgressBar
+            android:id="@+id/pop_prog_mass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:id="@+id/pop_food_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apple"
+            android:padding="16dp"
+            android:textSize="32sp"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/pop_food_mass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="56.3g"
+            android:textSize="32sp"
+            android:padding="16dp"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:paddingTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_ingredient_btn"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add ingredient"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"/>
+
+        <Button
+            android:id="@+id/finish_meal_btn"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="finish meal"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+</LinearLayout>

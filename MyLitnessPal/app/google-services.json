@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "622020273172",
+    "firebase_url": "https://mylitnesspal.firebaseio.com",
+    "project_id": "mylitnesspal",
+    "storage_bucket": "mylitnesspal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622020273172:android:708d165c70c6f77a",
+        "android_client_info": {
+          "package_name": "com.checc.mylitnesspal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622020273172-bkc9etl3iavmdj3ov40cqib5gf71bri6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.checc.mylitnesspal",
+            "certificate_hash": "387636c10f8edb6d2e204f007193ed1fcf6491c0"
+          }
+        },
+        {
+          "client_id": "622020273172-cthap0iqge9bb1umbge5nrl94rbgcsca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzhSPQZjKkNn-fpYoa7LAfGF8-DGdbo5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622020273172-cthap0iqge9bb1umbge5nrl94rbgcsca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

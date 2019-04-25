@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16sp">
+
+        <TextView
+            android:id="@+id/meal_card_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Meal 1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="32sp"/>
+
+        <TextView
+            android:id="@+id/meal_card_cals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="147 kcal"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="32sp"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
