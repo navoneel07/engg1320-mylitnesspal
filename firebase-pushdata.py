@@ -6,7 +6,7 @@ from cImage import *
 import math
 
 #dictionary containing caloric information on some foods (per 100g)
-foods = {"banana":89, "apple":52, "broccoli":34}
+foods = {"banana":89, "apple":52, "broccoli":34, "carrot":41, "bread":77, "toast":77}
 
 #setup clarifai api with its food model
 app = ClarifaiApp(api_key='528dcf0eeb5d4168b4a0a43831fc080c')
@@ -52,13 +52,21 @@ def processImage(message):
         #an image has been uploaded, process it using Clarifai Api
         response = model.predict_by_url(message["data"])
         
-        foodName = response["outputs"][0]["data"]["concepts"][0]["name"]
-        db.child("Ingredient").child("name").set(foodName)
-        db.child("Ingredient").child("kCal").set(str(getCalories(foodName, getWeight())))
-        print (foodName)
+        foodName1 = response["outputs"][0]["data"]["concepts"][0]["name"]
+        foodName2 = response["outputs"][0]["data"]["concepts"][1]["name"]
+        foodName3 = response["outputs"][0]["data"]["concepts"][2]["name"]
         
+        db.child("Ingredient").child("names").child("name1").set(foodName1)
+        db.child("Ingredient").child("names").child("name2").set(foodName2)
+        db.child("Ingredient").child("names").child("name3").set(foodName3)
+                
     else:
         print("no image uploaded")
 
+def processName(message):
+    if message["data"] != None:
+        db.child("Ingredient").child("kCal").set(str(getCalories(message["data"], getWeight())))
+
 imageStream = db.child("Ingredient").child("Photo").stream(processImage);
+nameStream = db.child("Ingredient").child("Name").stream(processName)
     
